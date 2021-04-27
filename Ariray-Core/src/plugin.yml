@@ -1,0 +1,6 @@
+name: Ariray-Core
+version: ${project.version}
+main: es.cadox8.ariray.Ariray
+author: cadox8
+database: true
+api-version: 1.16

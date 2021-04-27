@@ -1,0 +1,13 @@
+# Ariray Config
+
+# Misc
+debug: true
+language: en
+
+# Database configuration [MySQL >=8]
+mysql:
+  host: localhost
+  port: 3306
+  database: ariray
+  user: root
+  password: password
