@@ -1,0 +1,83 @@
+name: Bug Report
+description: Report a bug or console error
+labels: bug
+assignees: cadox8
+
+body:
+  - type: markdown
+    attributes:
+      value: "**Before reporting a bug, please see if using releases builds fixes your issue.**"
+
+  - type: textarea
+    attributes:
+      label: Console Error
+      description: |
+        If you encounter warnings/errors in your console, **paste them with https://paste.gg/ and put the paste link here**.
+        If the error is small/less than 10 lines, you may put it directly into this field.
+      value: |
+        ```
+        Put the paste.gg link or text here.
+        ```
+      placeholder: Please do not remove the grave accents; simply replace the line of text in the middle.
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Bug Description
+      description: |
+        Describe the unexpected behavior.
+        If you want to attach screenshots, use the comment field at the bottom of the page.
+      placeholder: |
+        Example: "Running levels up archer skill."
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Steps to Reproduce
+      description: |
+        List the steps on how we can reproduce the issue. Make sure we can easily understand what you mean with each step.
+      placeholder: |
+        Example:
+        1. Login into a server
+        2. Start running
+        3. The plugins levels you up the archer skill
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: |
+        Describe what exactly you expected to happen.
+      placeholder: |
+        Example: "Running levels up agility"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional Server Info
+      description: |
+        Do you use a proxy (eg. BungeeCord)? What software do you use and what plugins?
+      placeholder: |
+        Example: "I also use BungeeCord with the following plugins: x, y, z"
+    validations:
+      required: false
+
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      description: Make sure you have followed each of the steps outlined here.
+      options:
+        - label: If applicable, I have included a paste (**not a screenshot**) of the error.
+          required: true
+        - label: I have tried a build from releases and the issue still persists.
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Comments And Screenshots
+        If needed, add **screenshots to help explain your problem** in the comment field below.
