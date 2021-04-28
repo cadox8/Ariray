@@ -1,6 +1,9 @@
 # Ariray
 
-[![Build Status](https://travis-ci.com/cadox8/Ariray.svg?branch=master)](https://travis-ci.com/cadox8/Ariray)
+| Branch       |  Status 	|
+|:-:	       |:-:	        |
+|  Master      | [![Build Status Master](https://travis-ci.com/cadox8/Ariray.svg?branch=master)](https://travis-ci.com/cadox8/Ariray)   |
+| Development  | [![Build Status Development](https://travis-ci.com/cadox8/Ariray.svg?branch=development)](https://travis-ci.com/cadox8/Ariray)   |
 
 Ariray is the future of the RPG for Minecraft
 
