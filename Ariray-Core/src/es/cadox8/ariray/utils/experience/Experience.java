@@ -6,26 +6,31 @@ import java.util.Map;
 
 public class Experience {
 
-    public int getXPtoNextLevel(int level, Formula formula) {
-        return this.processStandardXPToNextLevel(level, formula);
+    public int getXPtoNextLevel(float base, int level, Formula formula) {
+        switch (formula) {
+            case EXPONENTIAL:
+
+                return 0;
+            case LINEAR:
+
+                return 0;
+
+            default:
+                return -1;
+        }
     }
 
-    private int processStandardXPToNextLevel(int level, Formula formulaType) {
-        Map<Integer, Integer> experienceMapRef = formulaType == Formula.LINEAR ? experienceNeededStandardLinear : experienceNeededStandardExponential;
+    public int getLevelFromXP(float xp, Formula formula) {
+        switch (formula) {
+            case EXPONENTIAL:
 
-        if(!experienceMapRef.containsKey(level)) {
-            int experienceSum = 0;
-            int retroIndex = (level * 10) + 1;
+                return 0;
+            case LINEAR:
 
-            //Sum the range of levels in Retro that this Standard level would represent
-            for(int x = retroIndex; x < (retroIndex + 10); x++) {
-                //calculateXPNeeded doesn't cache results so we use that instead of invoking the Retro XP methods to avoid memory bloat
-                experienceSum += calculateXPNeeded(x, formulaType);
-            }
+                return 0;
 
-            experienceMapRef.put(level, experienceSum);
+            default:
+                return -1;
         }
-
-        return experienceMapRef.get(level);
     }
 }

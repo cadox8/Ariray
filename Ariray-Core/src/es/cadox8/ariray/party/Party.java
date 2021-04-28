@@ -89,7 +89,7 @@ public class Party {
     }
 
     public int getXpToLevel() {
-        return (mcMMO.getFormulaManager().getXPtoNextLevel(level, Formula.EXPONENTIAL)) * (getOnlineMembers().size() + mcMMO.p.getGeneralConfig().getPartyXpCurveMultiplier());
+        return 0;
     }
 
     public String getXpToLevelPercentage() {

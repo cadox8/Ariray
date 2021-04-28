@@ -42,8 +42,13 @@ public class PartyManager {
         return true;
     }
 
-    public static boolean isSameParty(ArirayUser user1, ArirayUser user2) {
+    public static boolean removeFromParty(ArirayUser user, Party party) {
+        user.setPartyId(-1);
+        return party.removeMember(user);
+    }
 
+    public static boolean isSameParty(ArirayUser user1, ArirayUser user2) {
+        return false;
     }
 
 }
