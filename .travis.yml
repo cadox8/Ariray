@@ -1,14 +1,21 @@
+os:
+  - linux
+
 language: java
-install: mvn clean install
+
 jdk:
   - oraclejdk11
-notifications:
-  recipients:
-    - cadox8@gmail.com
-  on_success: never # default: change
-  on_failure: always # default: always
+
+cache:
+  directories:
+    - $HOME/.m2
+
+install: mvn clean install
 
 branches:
   only:
-    - gh-pages
-    - /.*/
+    - development
+    - master
+
+notifications:
+  email: false

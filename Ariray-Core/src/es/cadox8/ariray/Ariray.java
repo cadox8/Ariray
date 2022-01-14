@@ -1,8 +1,6 @@
 package es.cadox8.ariray;
 
-import es.cadox8.ariray.api.ArirayServer;
 import es.cadox8.ariray.database.MySQL;
-import es.cadox8.ariray.locales.Locale;
 import es.cadox8.ariray.locales.Locales;
 import es.cadox8.ariray.utils.Log;
 import es.cadox8.ariray.utils.Utils;
