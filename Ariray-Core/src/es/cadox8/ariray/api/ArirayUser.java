@@ -35,9 +35,9 @@ public class ArirayUser {
 
     public void save() {
         // ToDo: MySQL Save
-        ArirayServer.removeUser(this.getUuid());
+        this.plugin.getUserManager().removeUser(this);
         // ToDo: MySQL Load
-        ArirayServer.addUser(this);
+        this.plugin.getUserManager().addUser(this);
     }
 
     // Getters

@@ -1,7 +1,6 @@
 package es.cadox8.ariray;
 
 import com.mysql.cj.util.StringUtils;
-import es.cadox8.ariray.api.ArirayServer;
 import es.cadox8.ariray.api.ArirayUser;
 import es.cadox8.ariray.cmd.ArirayCmd;
 import es.cadox8.ariray.utils.Log;
@@ -82,7 +81,7 @@ public class ArirayCommands implements TabCompleter {
                     break;
                 }
                 if (sender instanceof Player) {
-                    ArirayUser p = ArirayServer.getUser((Player) sender);
+                    ArirayUser p = plugin.getUserManager().getUser(((Player) sender).getUniqueId());
 
                     if (cmdr.isHasPermission()) {
                         if (p.hasPermissions(cmdr.getPermission())) {
@@ -117,16 +116,12 @@ public class ArirayCommands implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         List<String> rtrn = null;
-        if (label.startsWith(name)) {
-            label = label.replaceFirst(name, "");
-        }
-        /*
-         * Auto Complete normal para cada comando si está declarado
-         */
+        if (label.startsWith(name)) label = label.replaceFirst(name, "");
+
         for (ArirayCmd cmdr : cmds) {
             if (cmdr.getName().equals(label) || cmdr.getAliases().contains(label)) {
                 try {
-                    if ((sender instanceof Player) && (cmdr.isHasPermission() && (!ArirayServer.getUser((Player) sender).hasPermissions(cmdr.getPermission())))) {
+                    if ((sender instanceof Player) && (cmdr.isHasPermission() && (!plugin.getUserManager().getUser(((Player) sender).getUniqueId()).hasPermissions(cmdr.getPermission())))) {
                         return new ArrayList<>();
                     }
                     rtrn = cmdr.onTabComplete(sender, cmd, label, args, args[args.length - 1], args.length - 1);
@@ -136,9 +131,7 @@ public class ArirayCommands implements TabCompleter {
                 break;
             }
         }
-        /*
-         * Si el autocomplete es null, que devuelva jugadores
-         */
+
         if (rtrn == null) {
             rtrn = new ArrayList<>();
             for (Player p : Bukkit.getOnlinePlayers()) {

@@ -17,7 +17,7 @@ import java.util.Random;
 
 public abstract class ArirayCmd {
 
-    protected static transient Ariray plugin = Ariray.getInstance();
+    protected transient Ariray plugin = Ariray.getInstance();
     @Getter private final transient String name;
     @Getter private final transient List<String> aliases;
     @Getter @Setter private boolean hasPermission;
@@ -35,15 +35,15 @@ public abstract class ArirayCmd {
     }
 
     public void run(ConsoleCommandSender sender, String label, String[] args) {
-        run((CommandSender) sender, label, args);
+        this.run((CommandSender) sender, label, args);
     }
 
     public void run(ArirayUser user, String label, String[] args) {
-        run(user.getPlayer(), label, args);
+        this.run(user.getPlayer(), label, args);
     }
 
     public void run(CommandSender sender, String label, String[] args) {
-        sender.sendMessage(Utils.colorize("&cEste comando no está funcional para este sender"));
+        sender.sendMessage(Utils.colorize("&cNo"));
     }
 
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args, String curs, Integer curn) {

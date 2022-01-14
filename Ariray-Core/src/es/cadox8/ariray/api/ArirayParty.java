@@ -14,7 +14,7 @@ public class ArirayParty {
 
     private final Ariray plugin = Ariray.getInstance();
 
-    private final int partyId;
+    @Getter private final int partyId;
     @Getter private String partyName;
 
     @Setter @Getter private ChatColor color;
@@ -52,7 +52,7 @@ public class ArirayParty {
      * @return
      */
     public boolean inviteMember(UUID mod, UUID uuid) {
-        return this.inviteMember(ArirayServer.getUser(mod), ArirayServer.getUser(uuid));
+        return this.inviteMember(this.plugin.getUserManager().getUser(mod), this.plugin.getUserManager().getUser(uuid));
     }
 
     /**

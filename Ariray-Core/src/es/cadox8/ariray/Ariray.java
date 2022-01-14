@@ -2,6 +2,8 @@ package es.cadox8.ariray;
 
 import es.cadox8.ariray.database.MySQL;
 import es.cadox8.ariray.locales.Locales;
+import es.cadox8.ariray.party.PartyManager;
+import es.cadox8.ariray.party.UserManager;
 import es.cadox8.ariray.utils.Log;
 import es.cadox8.ariray.utils.Utils;
 import lombok.Getter;
@@ -17,6 +19,9 @@ public final class Ariray extends JavaPlugin {
     @Getter private static boolean debug;
 
     @Getter private MySQL mysql;
+
+    @Getter private UserManager userManager;
+    @Getter private PartyManager partyManager;
 
     @Override
     public void onEnable() {
@@ -42,6 +47,12 @@ public final class Ariray extends JavaPlugin {
             Log.log(Log.Level.ERROR,"Ariray disabled");
             getServer().getPluginManager().disablePlugin(this);
         }
+
+        this.userManager = new UserManager(this);
+        this.partyManager = new PartyManager(this);
+
+        // Load Commands
+        ArirayCommands.load();
     }
 
     @Override

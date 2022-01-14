@@ -1,54 +1,46 @@
 package es.cadox8.ariray.party;
 
 import es.cadox8.ariray.Ariray;
-import es.cadox8.ariray.api.ArirayUser;
-import es.cadox8.ariray.channels.ChatChannel;
-import es.cadox8.ariray.datatype.ShareMode;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
+import es.cadox8.ariray.api.ArirayParty;
+import lombok.NonNull;
 
-import java.security.Permissions;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class PartyManager {
 
-    private static final Ariray plugin = Ariray.getInstance();
+    private final Ariray plugin;
 
-    private static final List<Party> parties = new ArrayList<>();
+    private final List<ArirayParty> parties;
 
-    private PartyManager() {}
-
-
-    public static boolean existsParty(int party) {
-        return parties.stream().anyMatch(p -> p.getId() == party);
+    public PartyManager(Ariray instance) {
+        this(instance, new ArrayList<>());
     }
 
-    public static boolean isPartyFull(Party targetParty) {
-        return targetParty.getMembers().size() >= plugin.getConfig().getInt("party.max_members");
+    public PartyManager(Ariray instance, @NonNull List<ArirayParty> parties) {
+        this.plugin = instance;
+        this.parties = parties;
     }
 
-    public static Party getParty(int id) {
-        return parties.stream().filter(p -> p.getId() == id).findAny().orElse(null);
+    public boolean newParty(@NonNull ArirayParty arirayParty) {
+        if (this.existsParty(arirayParty)) return true;
+        return this.parties.add(arirayParty);
     }
 
-    public static boolean joinParty(ArirayUser user, int id) {
-        if (user.getPartyId() != -1) removeFromParty(user, getParty(user.getPartyId()));
-        user.setPartyId(id);
-        getParty(id).addMember(user);
+    public boolean removeParty(@NonNull ArirayParty arirayParty) {
+        if (!this.existsParty(arirayParty)) return false;
+        this.parties.removeIf(p -> p.getPartyId() == arirayParty.getPartyId());
         return true;
     }
 
-    public static boolean removeFromParty(ArirayUser user, Party party) {
-        user.setPartyId(-1);
-        return party.removeMember(user);
+    public boolean existsParty(@NonNull ArirayParty arirayParty) {
+        return this.parties.stream().anyMatch(p -> p.getPartyId() == arirayParty.getPartyId());
     }
 
-    public static boolean isSameParty(ArirayUser user1, ArirayUser user2) {
-        return false;
+    // --- Database ---
+    public void loadParties() {
     }
 
+    public void saveParties() {
+    }
 }
