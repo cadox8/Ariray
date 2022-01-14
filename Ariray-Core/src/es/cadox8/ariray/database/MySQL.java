@@ -1,6 +1,7 @@
 package es.cadox8.ariray.database;
 
 import es.cadox8.ariray.Ariray;
+import es.cadox8.ariray.utils.Log;
 
 import java.sql.*;
 
@@ -25,7 +26,12 @@ public class MySQL {
     }
 
     public Connection getConnection() {
-        return connection;
+        try {
+            return this.openConnection();
+        } catch (SQLException | ClassNotFoundException e) {
+            Log.error(e.getMessage());
+            return null;
+        }
     }
 
     public boolean closeConnection() throws SQLException {

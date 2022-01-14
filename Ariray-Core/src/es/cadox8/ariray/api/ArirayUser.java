@@ -4,9 +4,11 @@ import es.cadox8.ariray.Ariray;
 import es.cadox8.ariray.channels.ChatChannel;
 import es.cadox8.ariray.locales.Locales;
 import es.cadox8.ariray.utils.Utils;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -19,8 +21,7 @@ public class ArirayUser {
     @Getter private final UUID uuid;
 
     // Data
-    @Getter @Setter private ChatChannel chatChannel = ChatChannel.GLOBAL;
-    @Getter @Setter private int partyId = 0;
+    @Getter @Setter private UserData userData;
 
     //
 
@@ -56,7 +57,6 @@ public class ArirayUser {
         return this.getOfflinePlayer().getName();
     }
 
-    // Setters
 
     // Methods
     public boolean hasPermissions(String permission) {
@@ -69,17 +69,26 @@ public class ArirayUser {
     public void sendRawMessage(String msg) {
         this.getPlayer().sendMessage(Ariray.getPrefix() + Utils.colorize(msg));
     }
+    public void sendPartyMessage(String partyName, ChatColor color, String sender, String message) {
+        this.getPlayer().sendMessage(color + partyName + ChatColor.GRAY + " >> " + ChatColor.RED + sender + ChatColor.GRAY + ": " + ChatColor.WHITE + message);
+    }
 
     public void updateChatChannel(ChatChannel newChannel) {
-        if (newChannel == this.getChatChannel()) return;
+        if (newChannel == this.getUserData().getChatChannel()) return;
         if (newChannel.isRestricted()) {
             if (this.hasPermissions(newChannel.getPermission())) {
-                this.setChatChannel(newChannel);
+                this.getUserData().setChatChannel(newChannel);
             } else {
                 this.sendMessage("no_permissions");
             }
         } else {
-            this.setChatChannel(newChannel);
+            this.getUserData().setChatChannel(newChannel);
         }
+    }
+
+
+    @Data
+    public final class UserData {
+        private ChatChannel chatChannel = ChatChannel.GLOBAL;
     }
 }
